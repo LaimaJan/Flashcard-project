@@ -1,0 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap");
+* {
+	font-size: 25px;
+}
+
+body {
+	margin: 0 auto;
+	padding: 0;
+	font-family: "roboto";
+	background-color: #ecd9f0;
+
+	display: flex;
+	/* flex-direction: column; */
+	align-items: center;
+}
+
+.new-card-div {
+	display: flex;
+	justify-content: center;
+	margin: 0 auto;
+	min-width: 100vw;
+}
+
+.flashcardInfoDiv {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 0 auto;
+	max-width: fit-content;
+}
+
+.create-card-btn,
+#add-new-btn {
+	/* margin-right: 30px; */
+	margin-top: 30px;
+	padding: 10px 30px;
+	margin-bottom: 30px;
+}
+
+.cardDeleteBtn,
+.cardEditBtn {
+	margin-top: 10px;
+}
+
+.questionLabel,
+.answerLabel,
+.hintLabel {
+	font-size: 25px;
+	color: darkcyan;
+}
+
+.create-card-div {
+	margin: 0 auto;
+	/* display: flex; */
+	flex-direction: column;
+	/* text-align: center; */
+	align-items: center;
+	background-color: #995db5;
+	min-width: 30vw;
+	max-width: 50vw;
+
+	max-height: 100vh;
+	min-height: 50vh;
+	font-size: 25px;
+
+	display: none;
+}
+
+.create-card-div h1 {
+	margin-top: 20px;
+	font-size: 40px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+}
+
+.create-card-div-info {
+	padding: 20px 60px;
+}
+
+.cancel-icon {
+	display: flex;
+	justify-content: right;
+	margin: 0 auto;
+}
+
+.fa-solid {
+	margin-top: 10px;
+	font-size: 35px;
+}
+
+input,
+.questionHolder,
+.answerHolder,
+.hintHolder {
+	font-size: 30px;
+	margin: 0 auto;
+	padding: 10px 60px;
+}
+
+.hide {
+	display: none;
+}
+
+.show-hide-btn {
+	border: 2px solid #1a1a1a;
+	border-radius: 15px;
+	box-sizing: border-box;
+	color: #3b3b3b;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 26px;
+
+	margin: 0;
+	min-height: 60px;
+	min-width: 0;
+	outline: none;
+	padding: 16px 24px;
+	text-align: center;
+}

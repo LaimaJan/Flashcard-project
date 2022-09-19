@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		/>
+		<link rel="stylesheet" href="css-styling/reset.css" />
+		<link rel="stylesheet" href="css-styling/style.css" />
+		<title>Document</title>
+	</head>
+	<body>
+		<div id="app">
+			<!-- add new card btn-->
+			<div class="new-card-div">
+				<button class="create-card-btn">Add new flashcard</button>
+			</div>
+			<!-- create new card form -->
+			<form class="create-card-div" action="#">
+				<h1>Create new card</h1>
+
+				<div class="create-card-div-info">
+					<div class="cancel-icon">
+						<i class="fa-solid fa-circle-minus"></i>
+					</div>
+					<div class="create-card-div-info">
+						<label for="question">Question:</label><br />
+						<input
+							type="text"
+							id="create-card-div-info-question"
+							name="question"
+						/><br />
+					</div>
+					<div class="create-card-div-info">
+						<label for="answer">Answer:</label><br />
+						<input
+							type="text"
+							id="create-card-div-info-answer"
+							name="answer"
+						/><br />
+					</div>
+					<div class="create-card-div-info">
+						<label for="hint">Hint:</label><br />
+						<input
+							type="text"
+							id="create-card-div-info-hint"
+							name="hint"
+						/><br />
+					</div>
+				</div>
+				<input type="submit" value="Add new card" id="add-new-btn"></input>
+			</form>
+			<!-- created card holder -->
+			<div class="new-card-holder"></div>
+		</div>
+	</body>
+	<script src="index.js"></script>
+</html>
