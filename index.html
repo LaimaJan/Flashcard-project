@@ -20,19 +20,20 @@
 			</div>
 			<!-- create new card form -->
 			<form class="create-card-div" action="#">
+				<div class="cancel-icon">
+					<i class="fa-solid fa-xmark"></i>
+				</div>
 				<h1>Create new card</h1>
 
 				<div class="create-card-div-info">
-					<div class="cancel-icon">
-						<i class="fa-solid fa-circle-minus"></i>
-					</div>
+					
 					<div class="create-card-div-info">
 						<label for="question">Question:</label><br />
 						<input
 							type="text"
 							id="create-card-div-info-question"
 							name="question"
-						/><br />
+						/>
 					</div>
 					<div class="create-card-div-info">
 						<label for="answer">Answer:</label><br />
@@ -40,7 +41,7 @@
 							type="text"
 							id="create-card-div-info-answer"
 							name="answer"
-						/><br />
+						/>
 					</div>
 					<div class="create-card-div-info">
 						<label for="hint">Hint:</label><br />
@@ -48,11 +49,12 @@
 							type="text"
 							id="create-card-div-info-hint"
 							name="hint"
-						/><br />
+						/>
 					</div>
 				</div>
 				<input type="submit" value="Add new card" id="add-new-btn"></input>
 			</form>
+			
 			<!-- created card holder -->
 			<div class="new-card-holder"></div>
 		</div>

@@ -1,5 +1,5 @@
 const addNewFlashcard = document.querySelector(".create-card-btn");
-const cancelCreateNewCardIcon = document.querySelector(".fa-circle-minus");
+const cancelCreateNewCardIcon = document.querySelector(".fa-xmark");
 const addNewQuestion = document.querySelector("#add-new-btn");
 const questionInput = document.querySelector("#create-card-div-info-question");
 const answerInput = document.querySelector("#create-card-div-info-answer");
@@ -22,10 +22,8 @@ addNewFlashcard.addEventListener("click", function showCard() {
 		questionInput.value = " ";
 		answerInput.value = " ";
 		hintInput.value = " ";
-		// addNewFlashcard.innerHTML = "Return to flashcards";
 	} else {
 		createNewCardDiv.style.display = "none";
-		// addNewFlashcard.innerHTML = "Add new flashcard";
 	}
 });
 
@@ -108,6 +106,7 @@ function displayFlashcards() {
 				displayFlashcards();
 			});
 
+			console.log(flashcard.editingText);
 			if (flashcard.editingText) {
 				questionHolder.value = flashcard.question;
 				answerHolder.value = flashcard.answer;
@@ -120,6 +119,7 @@ function displayFlashcards() {
 
 			const cardEditBtn = document.createElement("button");
 			cardEditBtn.setAttribute("class", "cardEditBtn");
+			// cardEditBtn.setAttribute("id", "edit-" + index);
 			cardEditBtn.textContent = flashcard.editingText ? "Save" : "Edit Card";
 
 			cardEditBtn.addEventListener("click", () => {
