@@ -102,7 +102,7 @@ function displayFlashcards() {
 			cardDeleteBtn.textContent = "Delete Card";
 			cardDeleteBtn.addEventListener("click", () => {
 				flashcardsInfo.splice(index, 1);
-				// flashcardInfoDiv.remove();
+				flashcardInfoDiv.remove();
 
 				console.log("DeleteBtn is working!");
 				// renewData();
