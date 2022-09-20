@@ -60,15 +60,18 @@ createNewCardDiv.addEventListener("submit", (e) => {
 function displayFlashcards() {
 	let flashcardsInfo = JSON.parse(localStorage.getItem("newFlascards")) || [];
 	console.log(flashcardsInfo);
+	const flashcardInfoDiv = document.createElement("div");
+	flashcardInfoDiv.setAttribute("class", "flashcardInfoDiv");
+
+	if (flashcardInfoDiv !== null) {
+		flashcardInfoDiv.remove();
+	}
 
 	flashcardsInfo
 		.filter((flashcard) => {
 			return flashcard.question || flashcard.answer || flashcard.hint;
 		})
 		.forEach((flashcard, index) => {
-			const flashcardInfoDiv = document.createElement("div");
-			flashcardInfoDiv.setAttribute("class", "flashcardInfoDiv");
-
 			const questionLabel = document.createElement("p");
 			questionLabel.innerHTML = "Question:";
 			questionLabel.setAttribute("class", "questionLabel");
@@ -99,7 +102,7 @@ function displayFlashcards() {
 			cardDeleteBtn.textContent = "Delete Card";
 			cardDeleteBtn.addEventListener("click", () => {
 				flashcardsInfo.splice(index, 1);
-				flashcardInfoDiv.remove();
+				// flashcardInfoDiv.remove();
 
 				console.log("DeleteBtn is working!");
 				// renewData();
