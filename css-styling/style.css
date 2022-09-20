@@ -102,6 +102,11 @@ input,
 	display: none;
 }
 
+.flashcardInfoDiv {
+	background-color: #d0cbd2;
+	padding: 40px 60px;
+}
+
 .show-hide-btn {
 	border: 2px solid #1a1a1a;
 	border-radius: 15px;

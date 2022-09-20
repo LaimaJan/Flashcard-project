@@ -32,8 +32,6 @@ addNewFlashcard.addEventListener("click", function showCard() {
 cancelCreateNewCardIcon.addEventListener("click", function cancelCard() {
 	if (createNewCardDiv.style.display === "block") {
 		createNewCardDiv.style.display = "none";
-	} else {
-		createNewCardDiv.style.display = "block";
 	}
 });
 
@@ -52,8 +50,6 @@ createNewCardDiv.addEventListener("submit", (e) => {
 
 	if (createNewCardDiv.style.display === "block") {
 		createNewCardDiv.style.display = "none";
-	} else {
-		createNewCardDiv.style.display = "block";
 	}
 
 	// renewData();
