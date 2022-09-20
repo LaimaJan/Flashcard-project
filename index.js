@@ -7,7 +7,7 @@ const hintInput = document.querySelector("#create-card-div-info-hint");
 const createNewCardDiv = document.querySelector(".create-card-div");
 const flashcardHolder = document.querySelector(".new-card-holder");
 
-let flashcardsInfo = [];
+let flashcardsInfo = JSON.parse(localStorage.getItem("newFlascards")) || [];
 
 displayFlashcards();
 // function renewData() {
@@ -58,13 +58,8 @@ createNewCardDiv.addEventListener("submit", (e) => {
 });
 
 function displayFlashcards() {
-	let flashcardsInfo = JSON.parse(localStorage.getItem("newFlascards")) || [];
-	console.log(flashcardsInfo);
-	const flashcardInfoDiv = document.createElement("div");
-	flashcardInfoDiv.setAttribute("class", "flashcardInfoDiv");
-
-	if (flashcardInfoDiv !== null) {
-		flashcardInfoDiv.remove();
+	if (document.querySelector(".flashcardInfoDiv") !== null) {
+		document.querySelector(".flashcardInfoDiv").remove();
 	}
 
 	flashcardsInfo
@@ -72,6 +67,9 @@ function displayFlashcards() {
 			return flashcard.question || flashcard.answer || flashcard.hint;
 		})
 		.forEach((flashcard, index) => {
+			const flashcardInfoDiv = document.createElement("div");
+			flashcardInfoDiv.setAttribute("class", "flashcardInfoDiv");
+
 			const questionLabel = document.createElement("p");
 			questionLabel.innerHTML = "Question:";
 			questionLabel.setAttribute("class", "questionLabel");
