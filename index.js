@@ -56,9 +56,7 @@ createNewCardDiv.addEventListener("submit", (e) => {
 });
 
 function displayFlashcards() {
-	if (document.querySelector(".flashcardInfoDiv") !== null) {
-		document.querySelector(".flashcardInfoDiv").remove();
-	}
+	document.querySelectorAll(".flashcardInfoDiv").forEach((el) => el.remove());
 
 	flashcardsInfo
 		.filter((flashcard) => {
@@ -67,6 +65,9 @@ function displayFlashcards() {
 		.forEach((flashcard, index) => {
 			const flashcardInfoDiv = document.createElement("div");
 			flashcardInfoDiv.setAttribute("class", "flashcardInfoDiv");
+
+			const flashcardButtonHolder = document.createElement("div");
+			flashcardButtonHolder.setAttribute("class", "flashcardButtonHolder");
 
 			const questionLabel = document.createElement("p");
 			questionLabel.innerHTML = "Question:";
@@ -155,6 +156,8 @@ function displayFlashcards() {
 				hintHolder.classList.toggle("hide");
 			});
 
+			flashcardButtonHolder.append(cardDeleteBtn, cardEditBtn);
+
 			flashcardInfoDiv.append(
 				questionLabel,
 				questionHolder,
@@ -164,8 +167,7 @@ function displayFlashcards() {
 				hintLabel,
 				linkHint,
 				hintHolder,
-				cardDeleteBtn,
-				cardEditBtn
+				flashcardButtonHolder
 			);
 
 			flashcardHolder.append(flashcardInfoDiv);
