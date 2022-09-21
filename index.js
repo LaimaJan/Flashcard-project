@@ -118,9 +118,11 @@ function displayFlashcards() {
 				hintHolder.textContent = flashcard.hint;
 			}
 
+			// const cardEditBtn = document.createElement("button");
 			const cardEditBtn = document.createElement("button");
+			// cardEditBtn.innerHTML = "fa-solid fa-trash-can";
+			// cardEditBtn.setAttribute("class", "fa-solid fa-trash-can");
 			cardEditBtn.setAttribute("class", "cardEditBtn");
-			// cardEditBtn.setAttribute("id", "edit-" + index);
 			cardEditBtn.textContent = flashcard.editingText ? "Save" : "Edit Card";
 
 			cardEditBtn.addEventListener("click", () => {
@@ -156,6 +158,8 @@ function displayFlashcards() {
 				hintHolder.classList.toggle("hide");
 			});
 
+			//  Right answer - wrong answer
+
 			flashcardButtonHolder.append(cardDeleteBtn, cardEditBtn);
 
 			flashcardInfoDiv.append(
@@ -173,3 +177,5 @@ function displayFlashcards() {
 			flashcardHolder.append(flashcardInfoDiv);
 		});
 }
+
+// function cardsGame() {}
