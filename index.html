@@ -10,16 +10,28 @@
 		/>
 		<link rel="stylesheet" href="css-styling/reset.css" />
 		<link rel="stylesheet" href="css-styling/style.css" />
-		<title>Document</title>
+		<title>Flashcards project</title>
 	</head>
 	<body>
 		<div id="app">
-			<!-- add new card btn-->
+			<div class="page-header">
+				<div class="start-game-div">
+					<button class="start-game-btn">Start Game</button>
+				</div>
+				<div class="reset-btn-div">
+					<button class="reset-btn">Reset Numbers</button>
+				</div>
+				<div class="guessed-cards-number-div">
+					<p class="all-card-number">Out of:</p>
+					<p class="answered-cards-number">Answered right:</p>
+					<p class="wrong-cards-number">Answered wrong:</p>
+				</div>
 			
-			<div class="new-card-div">
-				<button class="create-card-btn">Add new flashcard</button>
+				<div class="new-card-div">
+					<button class="create-card-btn">Add new flashcard</button>
+				</div>
 			</div>
-			<!-- created new card form -->
+			
 			<form class="create-card-div" action="#">
 
 				<div class="cancel-icon">
@@ -57,7 +69,7 @@
 				<input type="submit" value="Add new card" id="add-new-btn"></input>
 			</form>
 			
-			<!-- created card holder -->
+			
 			<div class="new-card-holder"></div>
 		</div>
 	</body>

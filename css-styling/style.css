@@ -18,8 +18,83 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	min-width: 75vw;
-	max-width: 80vw;
+	min-width: 55vw;
+	max-width: 70vw;
+}
+
+.page-header {
+	display: flex;
+	flex-direction: row;
+	margin: 0 auto;
+	min-width: 60vw;
+	max-width: 70vw;
+}
+
+.start-game-div {
+	display: flex;
+	justify-content: left;
+	margin: 0 auto;
+	margin-left: 10px;
+	min-width: 10vw;
+}
+
+.start-game-div button {
+	margin-top: 30px;
+	padding: 10px 30px;
+	margin-bottom: 30px;
+	background-color: #239b27;
+	border: none;
+	border-radius: 10px;
+	padding: 25px 45px;
+	font-size: 30px;
+	color: #ffffff;
+}
+
+.reset-btn-div {
+	display: flex;
+	justify-content: left;
+	margin: 0 auto;
+	margin-left: 10px;
+	min-width: 10vw;
+	max-width: 50vw;
+}
+
+.reset-btn-div button {
+	margin-top: 30px;
+	padding: 10px 30px;
+	margin-bottom: 30px;
+	background-color: #9861c2;
+	border: none;
+	border-radius: 10px;
+	padding: 25px 45px;
+	font-size: 30px;
+	color: #ffffff;
+
+	display: none;
+}
+
+.guessed-cards-number-div {
+	display: flex;
+	flex-direction: row;
+	margin: 0 auto;
+	margin-top: 30px;
+	min-width: 20vw;
+}
+
+.guessed-cards-number-div p {
+	font-size: 28px;
+	padding: 30px 100px;
+	margin-bottom: 30px;
+	/* display: none; */
+}
+
+.new-card-div {
+	display: flex;
+	justify-content: right;
+	margin: 0 auto;
+	margin-right: 10px;
+	min-width: 20vw;
+	max-width: 50vw;
 }
 
 .create-card-btn {
@@ -32,15 +107,6 @@ body {
 	padding: 25px 45px;
 	font-size: 30px;
 	color: #ffffff;
-}
-
-.new-card-div {
-	display: flex;
-	justify-content: right;
-	margin: 0 auto;
-	margin-right: 10px;
-	min-width: 20vw;
-	max-width: 50vw;
 }
 
 .create-card-div {
@@ -155,7 +221,6 @@ input {
 	border-radius: 20px;
 	min-width: 20vw;
 	max-width: 25vw;
-	max-height: 70vh;
 	padding-top: 20px;
 }
 
@@ -239,9 +304,55 @@ input {
 	margin-right: 10px;
 	padding: 15px 35px;
 	/* margin-bottom: 30px; */
-	border: none;
+	border: 5px solid #797575;
 	border-radius: 10px;
 	font-size: 30px;
-	color: #ffffff;
-	background-color: #f6aa1c;
+	color: #423c3c;
+	background-color: #fdf0d5;
+}
+
+.rightWrongBtnDiv {
+	margin: 0 auto;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	/* min-width: 20vw; */
+	margin-bottom: 20px;
+	display: none;
+}
+
+.rightAnswerButton {
+	/* margin-top: 20px; */
+	margin: 0 auto;
+	/* margin-left: 10px; */
+	/* margin-right: 10px; */
+
+	padding: 15px 35px;
+	border: none;
+}
+
+.wrongAnswerButton {
+	/* margin-top: 20px; */
+	margin: 0 auto;
+	/* margin-left: 10px; */
+	/* margin-right: 10px; */
+	padding: 15px 35px;
+	border: none;
+}
+
+.fa-circle-xmark,
+.fa-circle-check {
+	font-size: 70px;
+}
+
+.fa-circle-xmark {
+	color: #f6b11c;
+	margin: 0 auto;
+	/* margin-right: 230px; */
+}
+
+.fa-circle-check {
+	color: #1b9329;
+	margin: 0 auto;
+	/* margin-left: 230px; */
 }

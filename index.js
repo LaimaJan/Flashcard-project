@@ -6,13 +6,15 @@ const answerInput = document.querySelector("#create-card-div-info-answer");
 const hintInput = document.querySelector("#create-card-div-info-hint");
 const createNewCardDiv = document.querySelector(".create-card-div");
 const flashcardHolder = document.querySelector(".new-card-holder");
+const startBtn = document.querySelector(".start-game-btn");
+const resetBtn = document.querySelector(".reset-btn");
+const allCardsNumber = document.querySelector(".all-card-number");
+const answeredCardNumber = document.querySelector(".answered-cards-number");
+const wrongCardNumber = document.querySelector(".wrong-cards-number");
 
 let flashcardsInfo = JSON.parse(localStorage.getItem("newFlascards")) || [];
 
 displayFlashcards();
-// function renewData() {
-// 	localStorage.setItem("newFlascards", JSON.stringify(flashcardsInfo));
-// }
 
 addNewFlashcard.addEventListener("click", function showCard() {
 	console.log(`display of createNewCard: ${createNewCardDiv.style.display}`);
@@ -50,7 +52,6 @@ createNewCardDiv.addEventListener("submit", (e) => {
 		createNewCardDiv.style.display = "none";
 	}
 
-	// renewData();
 	localStorage.setItem("newFlascards", JSON.stringify(flashcardsInfo));
 	displayFlashcards();
 });
@@ -63,46 +64,49 @@ function displayFlashcards() {
 			return flashcard.question || flashcard.answer || flashcard.hint;
 		})
 		.forEach((flashcard, index) => {
-			const flashcardInfoDiv = document.createElement("div");
-			flashcardInfoDiv.setAttribute("class", "flashcardInfoDiv");
+			const flashcardInfoDiv = generateObjectElement("div", "flashcardInfoDiv");
 
-			const flashcardButtonHolder = document.createElement("div");
-			flashcardButtonHolder.setAttribute("class", "flashcardButtonHolder");
-
-			const questionLabel = document.createElement("p");
-			questionLabel.innerHTML = "Question:";
-			questionLabel.setAttribute("class", "questionLabel");
-
-			const questionHolder = document.createElement(
-				flashcard.editingText ? "input" : "p"
+			const flashcardButtonHolder = generateObjectElement(
+				"div",
+				"flashcardButtonHolder"
 			);
-			questionHolder.setAttribute("class", "questionHolder");
 
-			const answerLabel = document.createElement("p");
-			answerLabel.innerHTML = "Answer:";
-			answerLabel.setAttribute("class", "answerLabel");
+			const questionLabel = generateObjectElement(
+				"p",
+				"questionLabel",
+				"Question:"
+			);
+
+			const questionHolder = generateObjectElement(
+				flashcard.editingText ? "input" : "p",
+				"questionHolder"
+			);
+
+			const answerLabel = generateObjectElement("p", "answerLabel", "Answer:");
+
 			const answerHolder = document.createElement(
 				flashcard.editingText ? "input" : "p"
 			);
 			answerHolder.classList.add("answerHolder", "hide");
 
-			const hintLabel = document.createElement("p");
-			hintLabel.innerHTML = "Hint:";
-			hintLabel.setAttribute("class", "hintLabel");
+			const hintLabel = generateObjectElement("p", "hintLabel", "Hint:");
+
 			const hintHolder = document.createElement(
 				flashcard.editingText ? "input" : "p"
 			);
 			hintHolder.classList.add("hintHolder", "hide");
 
-			const cardDeleteBtn = document.createElement("button");
-			cardDeleteBtn.setAttribute("class", "cardDeleteBtn");
-			cardDeleteBtn.textContent = "Delete Card";
+			const cardDeleteBtn = generateObjectElement(
+				"button",
+				"cardDeleteBtn",
+				"Delete Card"
+			);
 			cardDeleteBtn.addEventListener("click", () => {
 				flashcardsInfo.splice(index, 1);
 				flashcardInfoDiv.remove();
 
 				console.log("DeleteBtn is working!");
-				// renewData();
+
 				localStorage.setItem("newFlascards", JSON.stringify(flashcardsInfo));
 				displayFlashcards();
 			});
@@ -118,13 +122,11 @@ function displayFlashcards() {
 				hintHolder.textContent = flashcard.hint;
 			}
 
-			// const cardEditBtn = document.createElement("button");
-			const cardEditBtn = document.createElement("button");
-			// cardEditBtn.innerHTML = "fa-solid fa-trash-can";
-			// cardEditBtn.setAttribute("class", "fa-solid fa-trash-can");
-			cardEditBtn.setAttribute("class", "cardEditBtn");
-			cardEditBtn.textContent = flashcard.editingText ? "Save" : "Edit Card";
-
+			const cardEditBtn = generateObjectElement(
+				"button",
+				"cardEditBtn",
+				flashcard.editingText ? "Save" : "Edit Card"
+			);
 			cardEditBtn.addEventListener("click", () => {
 				if (flashcard.editingText) {
 					flashcardsInfo[index].question = questionHolder.value;
@@ -135,32 +137,39 @@ function displayFlashcards() {
 				flashcardsInfo[index].editingText = !flashcardsInfo[index].editingText;
 
 				console.log("EditBtn is working!");
-				// renewData();
 				localStorage.setItem("newFlascards", JSON.stringify(flashcardsInfo));
 
 				displayFlashcards();
 			});
 
-			// Toggle the answer
-			let linkAnswer = document.createElement("a");
+			let linkAnswer = generateObjectElement("a", "show-hide-btn", "Show/Hide");
 			linkAnswer.setAttribute("href", "#");
-			linkAnswer.setAttribute("class", "show-hide-btn");
-			linkAnswer.innerHTML = "Show/Hide";
 			linkAnswer.addEventListener("click", () => {
 				answerHolder.classList.toggle("hide");
 			});
-			//Toggle the hint
-			let linkHint = document.createElement("a");
+
+			let linkHint = generateObjectElement("a", "show-hide-btn", "Show/Hide");
 			linkHint.setAttribute("href", "#");
-			linkHint.setAttribute("class", "show-hide-btn");
-			linkHint.innerHTML = "Show/Hide";
 			linkHint.addEventListener("click", () => {
 				hintHolder.classList.toggle("hide");
 			});
 
-			//  Right answer - wrong answer
+			const rightWrongBtnDiv = generateObjectElement("div", "rightWrongBtnDiv");
+
+			const rightAnswerButton = generateObjectElement(
+				"button",
+				"rightAnswerButton"
+			);
+			rightAnswerButton.innerHTML = `<i class="fa-regular fa-circle-xmark"></i>`;
+
+			const wrongAnswerButton = generateObjectElement(
+				"button",
+				"wrongAnswerButton"
+			);
+			wrongAnswerButton.innerHTML = `<i class="fa-regular fa-circle-check"></i>`;
 
 			flashcardButtonHolder.append(cardDeleteBtn, cardEditBtn);
+			rightWrongBtnDiv.append(rightAnswerButton, wrongAnswerButton);
 
 			flashcardInfoDiv.append(
 				questionLabel,
@@ -171,11 +180,73 @@ function displayFlashcards() {
 				hintLabel,
 				linkHint,
 				hintHolder,
-				flashcardButtonHolder
+				flashcardButtonHolder,
+				rightWrongBtnDiv
 			);
 
 			flashcardHolder.append(flashcardInfoDiv);
 		});
 }
 
-// function cardsGame() {}
+function generateObjectElement(selector, className, text) {
+	const element = document.createElement(selector);
+	element.classList.add(className);
+
+	if (typeof text !== "undefined") {
+		element.innerText = text;
+	}
+
+	return element;
+}
+
+startBtn.addEventListener("click", () => {
+	const rightWrongBtnDiv = document.getElementsByClassName("rightWrongBtnDiv");
+	console.log("StartBtn working");
+	console.log(rightWrongBtnDiv);
+
+	Array.from(rightWrongBtnDiv).forEach((v) =>
+		v.addEventListener("click", function () {
+			this.parentElement
+				.getElementsByClassName("content")[0]
+				.classList.toggle("hidden");
+		})
+	);
+	// for (let i = 0; i < rightWrongBtnDiv.length; i++) {
+	// 	console.log(rightWrongBtnDiv.length);
+	// }
+	// if (
+	// 	resetBtn.style.display === "none" &&
+	// 	rightWrongBtnDiv.style.display === "none"
+	// ) {
+	// 	resetBtn.style.display = "block";
+	// 	rightWrongBtnDiv.style.display = "block";
+	// } else {
+	// 	resetBtn.style.display = "none";
+	// 	rightWrongBtnDiv.style.display = "none";
+	// }
+
+	// if (
+	// 	resetBtn.style.display === "none" &&
+	// 	rightWrongBtnDiv.style.display === "none"
+	// ) {
+	// 	resetBtn.style.display = "block";
+	// 	rightWrongBtnDiv.style.display = "block";
+	// } else {
+	// 	resetBtn.style.display = "none";
+	// 	rightWrongBtnDiv.style.display = "none";
+	// }
+
+	const createdFlashcardsNumber =
+		flashcardHolder.getElementsByClassName("flashcardInfoDiv").length;
+
+	allCardsNumber.innerHTML = `Out of: ${createdFlashcardsNumber}`;
+});
+
+document.querySelector(".fa-circle-xmark").addEventListener("click", () => {
+	console.log("XMARK ICON working");
+	// let flashcardInfoDiv = document.querySelector(".flashcardInfoDiv");
+});
+
+document.querySelector(".fa-circle-check").addEventListener("click", () => {
+	console.log("CHECK ICON working");
+});
