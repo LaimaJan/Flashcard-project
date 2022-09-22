@@ -356,3 +356,11 @@ input {
 	margin: 0 auto;
 	/* margin-left: 230px; */
 }
+
+.answeredWrong {
+	background-color: rgb(216, 120, 120);
+}
+
+.answeredRight {
+	background-color: rgb(94, 180, 94);
+}

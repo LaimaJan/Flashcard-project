@@ -160,13 +160,13 @@ function displayFlashcards() {
 				"button",
 				"rightAnswerButton"
 			);
-			rightAnswerButton.innerHTML = `<i class="fa-regular fa-circle-xmark"></i>`;
+			rightAnswerButton.innerHTML = `<i class="fa-regular fa-circle-xmark wrong"></i>`;
 
 			const wrongAnswerButton = generateObjectElement(
 				"button",
 				"wrongAnswerButton"
 			);
-			wrongAnswerButton.innerHTML = `<i class="fa-regular fa-circle-check"></i>`;
+			wrongAnswerButton.innerHTML = `<i class="fa-regular fa-circle-check right"></i>`;
 
 			flashcardButtonHolder.append(cardDeleteBtn, cardEditBtn);
 			rightWrongBtnDiv.append(rightAnswerButton, wrongAnswerButton);
@@ -202,51 +202,40 @@ function generateObjectElement(selector, className, text) {
 startBtn.addEventListener("click", () => {
 	const rightWrongBtnDiv = document.getElementsByClassName("rightWrongBtnDiv");
 	console.log("StartBtn working");
-	console.log(rightWrongBtnDiv);
 
-	Array.from(rightWrongBtnDiv).forEach((v) =>
-		v.addEventListener("click", function () {
-			this.parentElement
-				.getElementsByClassName("content")[0]
-				.classList.toggle("hidden");
-		})
-	);
-	// for (let i = 0; i < rightWrongBtnDiv.length; i++) {
-	// 	console.log(rightWrongBtnDiv.length);
-	// }
-	// if (
-	// 	resetBtn.style.display === "none" &&
-	// 	rightWrongBtnDiv.style.display === "none"
-	// ) {
-	// 	resetBtn.style.display = "block";
-	// 	rightWrongBtnDiv.style.display = "block";
-	// } else {
-	// 	resetBtn.style.display = "none";
-	// 	rightWrongBtnDiv.style.display = "none";
-	// }
-
-	// if (
-	// 	resetBtn.style.display === "none" &&
-	// 	rightWrongBtnDiv.style.display === "none"
-	// ) {
-	// 	resetBtn.style.display = "block";
-	// 	rightWrongBtnDiv.style.display = "block";
-	// } else {
-	// 	resetBtn.style.display = "none";
-	// 	rightWrongBtnDiv.style.display = "none";
-	// }
+	Array.from(rightWrongBtnDiv).forEach((el) => {
+		el.style.display = "block";
+	});
 
 	const createdFlashcardsNumber =
 		flashcardHolder.getElementsByClassName("flashcardInfoDiv").length;
 
 	allCardsNumber.innerHTML = `Out of: ${createdFlashcardsNumber}`;
+	answeredCardNumber.innerHTML = `Answered right:`;
+	wrongCardNumber.innerHTML = `Answered wrong:`;
 });
 
-document.querySelector(".fa-circle-xmark").addEventListener("click", () => {
-	console.log("XMARK ICON working");
-	// let flashcardInfoDiv = document.querySelector(".flashcardInfoDiv");
+// const answeredCardNumber = document.querySelector(".answered-cards-number");
+// const wrongCardNumber = document.querySelector(".wrong-cards-number");
+
+const wrongBtn = document.querySelectorAll(".wrong");
+wrongBtn.forEach((elem, index) => {
+	elem.addEventListener("click", function () {
+		let i = 0;
+		i++;
+
+		wrongCardNumber.innerHTML = `Answered wrong: ${i}`;
+		console.log(`${elem} Button WRONG is clicked ${index}`);
+	});
 });
 
-document.querySelector(".fa-circle-check").addEventListener("click", () => {
-	console.log("CHECK ICON working");
+const RightBtn = document.querySelectorAll(".right");
+RightBtn.forEach((elem, index) => {
+	elem.addEventListener("click", function () {
+		let i = 0;
+		i++;
+
+		answeredCardNumber.innerHTML = `Answered wrong: ${i}`;
+		console.log(`Button RIGHT is clicked ${index}`);
+	});
 });
