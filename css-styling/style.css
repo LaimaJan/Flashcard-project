@@ -215,7 +215,7 @@ input {
 	align-items: center;
 	margin: 0 auto;
 	margin: 30px 50px;
-	background-color: #efeeef;
+	background-color: transparent;
 	/* padding: 60px 90px; */
 	border: 5px solid #dcd9e2;
 	border-radius: 20px;
@@ -319,6 +319,7 @@ input {
 	/* min-width: 20vw; */
 	margin-bottom: 20px;
 	display: none;
+	background-color: rgba(255, 255, 255, 0.5);
 }
 
 .rightAnswerButton {
@@ -326,9 +327,13 @@ input {
 	margin: 0 auto;
 	/* margin-left: 10px; */
 	/* margin-right: 10px; */
-
-	padding: 15px 35px;
+	background-color: transparent;
+	background-repeat: no-repeat;
 	border: none;
+	cursor: pointer;
+	overflow: hidden;
+	outline: none;
+	padding: 15px 35px;
 }
 
 .wrongAnswerButton {
@@ -337,7 +342,12 @@ input {
 	/* margin-left: 10px; */
 	/* margin-right: 10px; */
 	padding: 15px 35px;
+	background-color: transparent;
+	/* background-repeat: no-repeat; */
 	border: none;
+	cursor: pointer;
+	/* overflow: hidden; */
+	outline: none;
 }
 
 .fa-circle-xmark,

@@ -199,43 +199,70 @@ function generateObjectElement(selector, className, text) {
 	return element;
 }
 
+const rightWrongBtnDiv = document.getElementsByClassName("rightWrongBtnDiv");
 startBtn.addEventListener("click", () => {
-	const rightWrongBtnDiv = document.getElementsByClassName("rightWrongBtnDiv");
 	console.log("StartBtn working");
 
 	Array.from(rightWrongBtnDiv).forEach((el) => {
 		el.style.display = "block";
+		// console.log(el);
 	});
+
+	if (resetBtn.style.display === "block") {
+		resetBtn.style.display = "none";
+	} else {
+		resetBtn.style.display = "block";
+	}
 
 	const createdFlashcardsNumber =
 		flashcardHolder.getElementsByClassName("flashcardInfoDiv").length;
 
 	allCardsNumber.innerHTML = `Out of: ${createdFlashcardsNumber}`;
-	answeredCardNumber.innerHTML = `Answered right:`;
-	wrongCardNumber.innerHTML = `Answered wrong:`;
+	answeredCardNumber.innerHTML = `Answered right: 0`;
+	wrongCardNumber.innerHTML = `Answered wrong: 0`;
 });
 
-// const answeredCardNumber = document.querySelector(".answered-cards-number");
-// const wrongCardNumber = document.querySelector(".wrong-cards-number");
-
+let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
+let i = 0;
 const wrongBtn = document.querySelectorAll(".wrong");
 wrongBtn.forEach((elem, index) => {
 	elem.addEventListener("click", function () {
-		let i = 0;
 		i++;
-
 		wrongCardNumber.innerHTML = `Answered wrong: ${i}`;
-		console.log(`${elem} Button WRONG is clicked ${index}`);
+
+		newFlashcard[index].style.backgroundColor = "rgb(240, 84, 84)";
+		rightWrongBtnDiv[index].style.backgroundColor = "rgb(240, 84, 84)";
+
+		console.log(`Button WRONG is clicked ${index}`);
 	});
 });
 
+let m = 0;
 const RightBtn = document.querySelectorAll(".right");
 RightBtn.forEach((elem, index) => {
 	elem.addEventListener("click", function () {
-		let i = 0;
-		i++;
+		m++;
+		answeredCardNumber.innerHTML = `Answered right: ${m}`;
 
-		answeredCardNumber.innerHTML = `Answered wrong: ${i}`;
+		newFlashcard[index].style.backgroundColor = "rgb(103, 198, 103)";
+		rightWrongBtnDiv[index].style.backgroundColor = "rgb(103, 198, 103)";
+
 		console.log(`Button RIGHT is clicked ${index}`);
 	});
+});
+
+resetBtn.addEventListener("click", function () {
+	let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
+
+	Array.from(newFlashcard).forEach((el, index) => {
+		el.style.backgroundColor = "transparent";
+		rightWrongBtnDiv[index].style.backgroundColor = "transparent";
+	});
+
+	i = 0;
+	m = 0;
+	answeredCardNumber.innerHTML = `Answered right: ${m}`;
+	wrongCardNumber.innerHTML = `Answered wrong: ${i}`;
+
+	console.log(`Pressed reset btn is clicked`);
 });
