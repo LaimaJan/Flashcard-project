@@ -11,6 +11,7 @@ const resetBtn = document.querySelector(".reset-btn");
 const allCardsNumber = document.querySelector(".all-card-number");
 const answeredCardNumber = document.querySelector(".answered-cards-number");
 const wrongCardNumber = document.querySelector(".wrong-cards-number");
+const endGameBtn = document.querySelector(".end-game-btn");
 
 let flashcardsInfo = JSON.parse(localStorage.getItem("newFlascards")) || [];
 
@@ -27,6 +28,26 @@ addNewFlashcard.addEventListener("click", function showCard() {
 	} else {
 		createNewCardDiv.style.display = "none";
 	}
+
+	if (resetBtn.style.display === "block") {
+		resetBtn.style.display = "none";
+	}
+
+	Array.from(rightWrongBtnDiv).forEach((el) => {
+		el.style.display = "none";
+	});
+
+	allCardsNumber.style.display = "none";
+	answeredCardNumber.style.display = "none";
+	wrongCardNumber.style.display = "none";
+
+	startBtn.style.visibility = "visible";
+	endGameBtn.style.display = "none";
+
+	Array.from(newFlashcard).forEach((el, index) => {
+		el.style.backgroundColor = "transparent";
+		rightWrongBtnDiv[index].style.backgroundColor = "transparent";
+	});
 });
 
 cancelCreateNewCardIcon.addEventListener("click", function cancelCard() {
@@ -200,7 +221,7 @@ function generateObjectElement(selector, className, text) {
 }
 
 const rightWrongBtnDiv = document.getElementsByClassName("rightWrongBtnDiv");
-startBtn.addEventListener("click", () => {
+startBtn.addEventListener("click", function startGame() {
 	console.log("StartBtn working");
 
 	Array.from(rightWrongBtnDiv).forEach((el) => {
@@ -208,18 +229,29 @@ startBtn.addEventListener("click", () => {
 		// console.log(el);
 	});
 
-	if (resetBtn.style.display === "block") {
+	if (
+		resetBtn.style.display === "block" ||
+		endGameBtn.style.display === "block"
+	) {
 		resetBtn.style.display = "none";
+		endGameBtn.style.display = "none";
 	} else {
 		resetBtn.style.display = "block";
+		endGameBtn.style.display = "block";
 	}
 
 	const createdFlashcardsNumber =
 		flashcardHolder.getElementsByClassName("flashcardInfoDiv").length;
 
+	allCardsNumber.style.display = "block";
+	answeredCardNumber.style.display = "block";
+	wrongCardNumber.style.display = "block";
+
 	allCardsNumber.innerHTML = `Out of: ${createdFlashcardsNumber}`;
 	answeredCardNumber.innerHTML = `Answered right: 0`;
 	wrongCardNumber.innerHTML = `Answered wrong: 0`;
+
+	startBtn.style.visibility = "hidden";
 });
 
 let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
@@ -231,32 +263,34 @@ wrongBtn.forEach((elem, index) => {
 		wrongCardNumber.innerHTML = `Answered wrong: ${i}`;
 
 		newFlashcard[index].style.backgroundColor = "rgb(240, 84, 84)";
-		rightWrongBtnDiv[index].style.backgroundColor = "rgb(240, 84, 84)";
+		rightWrongBtnDiv[index].style.display = "none";
 
 		console.log(`Button WRONG is clicked ${index}`);
 	});
 });
 
 let m = 0;
-const RightBtn = document.querySelectorAll(".right");
-RightBtn.forEach((elem, index) => {
+const rightBtn = document.querySelectorAll(".right");
+rightBtn.forEach((elem, index) => {
 	elem.addEventListener("click", function () {
 		m++;
 		answeredCardNumber.innerHTML = `Answered right: ${m}`;
 
 		newFlashcard[index].style.backgroundColor = "rgb(103, 198, 103)";
-		rightWrongBtnDiv[index].style.backgroundColor = "rgb(103, 198, 103)";
+		rightWrongBtnDiv[index].style.display = "none";
 
 		console.log(`Button RIGHT is clicked ${index}`);
 	});
 });
 
-resetBtn.addEventListener("click", function () {
+resetBtn.addEventListener("click", function resetGame() {
 	let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
 
 	Array.from(newFlashcard).forEach((el, index) => {
 		el.style.backgroundColor = "transparent";
 		rightWrongBtnDiv[index].style.backgroundColor = "transparent";
+
+		rightWrongBtnDiv[index].style.display = "block";
 	});
 
 	i = 0;
@@ -264,5 +298,36 @@ resetBtn.addEventListener("click", function () {
 	answeredCardNumber.innerHTML = `Answered right: ${m}`;
 	wrongCardNumber.innerHTML = `Answered wrong: ${i}`;
 
+	const createdFlashcardsNumber =
+		flashcardHolder.getElementsByClassName("flashcardInfoDiv").length;
+
+	allCardsNumber.innerHTML = `Out of: ${createdFlashcardsNumber}`;
+
 	console.log(`Pressed reset btn is clicked`);
+});
+
+endGameBtn.addEventListener("click", function endGame() {
+	console.log("End Game Btn working");
+
+	if (resetBtn.style.display === "none") {
+		resetBtn.style.display = "block";
+	} else {
+		resetBtn.style.display = "none";
+	}
+
+	Array.from(rightWrongBtnDiv).forEach((el) => {
+		el.style.display = "none";
+	});
+
+	allCardsNumber.style.display = "none";
+	answeredCardNumber.style.display = "none";
+	wrongCardNumber.style.display = "none";
+
+	startBtn.style.visibility = "visible";
+	endGameBtn.style.display = "none";
+
+	Array.from(newFlashcard).forEach((el, index) => {
+		el.style.backgroundColor = "transparent";
+		rightWrongBtnDiv[index].style.backgroundColor = "transparent";
+	});
 });
