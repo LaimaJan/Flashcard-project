@@ -13,9 +13,11 @@ const answeredCardNumber = document.querySelector(".answered-cards-number");
 const wrongCardNumber = document.querySelector(".wrong-cards-number");
 const endGameBtn = document.querySelector(".end-game-btn");
 
-let flashcardsInfo = JSON.parse(localStorage.getItem("newFlascards")) || [];
+let flashcardsInfo = JSON.parse(localStorage.getItem("newFlashcards")) || [];
 
 displayFlashcards();
+let i = 0;
+let m = 0;
 
 addNewFlashcard.addEventListener("click", function showCard() {
 	console.log(`display of createNewCard: ${createNewCardDiv.style.display}`);
@@ -73,7 +75,7 @@ createNewCardDiv.addEventListener("submit", (e) => {
 		createNewCardDiv.style.display = "none";
 	}
 
-	localStorage.setItem("newFlascards", JSON.stringify(flashcardsInfo));
+	localStorage.setItem("newFlashcards", JSON.stringify(flashcardsInfo));
 	displayFlashcards();
 });
 
@@ -128,7 +130,7 @@ function displayFlashcards() {
 
 				console.log("DeleteBtn is working!");
 
-				localStorage.setItem("newFlascards", JSON.stringify(flashcardsInfo));
+				localStorage.setItem("newFlashcards", JSON.stringify(flashcardsInfo));
 				displayFlashcards();
 			});
 
@@ -158,7 +160,7 @@ function displayFlashcards() {
 				flashcardsInfo[index].editingText = !flashcardsInfo[index].editingText;
 
 				console.log("EditBtn is working!");
-				localStorage.setItem("newFlascards", JSON.stringify(flashcardsInfo));
+				localStorage.setItem("newFlashcards", JSON.stringify(flashcardsInfo));
 
 				displayFlashcards();
 			});
@@ -207,6 +209,33 @@ function displayFlashcards() {
 
 			flashcardHolder.append(flashcardInfoDiv);
 		});
+
+	let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
+	const wrongBtn = document.querySelectorAll(".wrong");
+	wrongBtn.forEach((elem, index) => {
+		elem.addEventListener("click", function () {
+			i++;
+			wrongCardNumber.innerHTML = `Answered wrong: ${i}`;
+
+			newFlashcard[index].style.backgroundColor = "rgb(240, 84, 84)";
+			rightWrongBtnDiv[index].style.display = "none";
+
+			console.log(`Button WRONG is clicked ${index}`);
+		});
+	});
+
+	const rightBtn = document.querySelectorAll(".right");
+	rightBtn.forEach((elem, index) => {
+		elem.addEventListener("click", function () {
+			m++;
+			answeredCardNumber.innerHTML = `Answered right: ${m}`;
+
+			newFlashcard[index].style.backgroundColor = "rgb(103, 198, 103)";
+			rightWrongBtnDiv[index].style.display = "none";
+
+			console.log(`Button RIGHT is clicked ${index}`);
+		});
+	});
 }
 
 function generateObjectElement(selector, className, text) {
@@ -255,37 +284,8 @@ startBtn.addEventListener("click", function startGame() {
 });
 
 let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
-let i = 0;
-const wrongBtn = document.querySelectorAll(".wrong");
-wrongBtn.forEach((elem, index) => {
-	elem.addEventListener("click", function () {
-		i++;
-		wrongCardNumber.innerHTML = `Answered wrong: ${i}`;
-
-		newFlashcard[index].style.backgroundColor = "rgb(240, 84, 84)";
-		rightWrongBtnDiv[index].style.display = "none";
-
-		console.log(`Button WRONG is clicked ${index}`);
-	});
-});
-
-let m = 0;
-const rightBtn = document.querySelectorAll(".right");
-rightBtn.forEach((elem, index) => {
-	elem.addEventListener("click", function () {
-		m++;
-		answeredCardNumber.innerHTML = `Answered right: ${m}`;
-
-		newFlashcard[index].style.backgroundColor = "rgb(103, 198, 103)";
-		rightWrongBtnDiv[index].style.display = "none";
-
-		console.log(`Button RIGHT is clicked ${index}`);
-	});
-});
 
 resetBtn.addEventListener("click", function resetGame() {
-	let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
-
 	Array.from(newFlashcard).forEach((el, index) => {
 		el.style.backgroundColor = "transparent";
 		rightWrongBtnDiv[index].style.backgroundColor = "transparent";
