@@ -16,14 +16,16 @@ displayFlashcards();
 
 let i = 0;
 let m = 0;
-createNewCardDiv.style.display = "none";
+
+let addingNewCard = false;
 
 addNewFlashcard.addEventListener("click", function showCard() {
 	document
 		.querySelectorAll(".guessedCardsNumberDiv")
 		.forEach((el) => el.remove());
 
-	if (createNewCardDiv.style.display === "none") {
+	if (!addingNewCard) {
+		addingNewCard = true;
 		createNewCardDiv.style.display = "block";
 		questionInput.value = " ";
 		answerInput.value = " ";
@@ -73,6 +75,8 @@ createNewCardDiv.addEventListener("submit", (e) => {
 	}
 
 	localStorage.setItem("newFlashcards", JSON.stringify(flashcardsInfo));
+
+	addingNewCard = false;
 	displayFlashcards();
 });
 
