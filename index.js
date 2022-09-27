@@ -8,19 +8,20 @@ const createNewCardDiv = document.querySelector(".create-card-div");
 const flashcardHolder = document.querySelector(".new-card-holder");
 const startBtn = document.querySelector(".start-game-btn");
 const resetBtn = document.querySelector(".reset-btn");
-const allCardsNumber = document.querySelector(".all-card-number");
-const answeredCardNumber = document.querySelector(".answered-cards-number");
-const wrongCardNumber = document.querySelector(".wrong-cards-number");
 const endGameBtn = document.querySelector(".end-game-btn");
 
 let flashcardsInfo = JSON.parse(localStorage.getItem("newFlashcards")) || [];
 
 displayFlashcards();
+
 let i = 0;
 let m = 0;
+createNewCardDiv.style.display = "none";
 
 addNewFlashcard.addEventListener("click", function showCard() {
-	console.log(`display of createNewCard: ${createNewCardDiv.style.display}`);
+	document
+		.querySelectorAll(".guessedCardsNumberDiv")
+		.forEach((el) => el.remove());
 
 	if (createNewCardDiv.style.display === "none") {
 		createNewCardDiv.style.display = "block";
@@ -38,10 +39,6 @@ addNewFlashcard.addEventListener("click", function showCard() {
 	Array.from(rightWrongBtnDiv).forEach((el) => {
 		el.style.display = "none";
 	});
-
-	allCardsNumber.style.display = "none";
-	answeredCardNumber.style.display = "none";
-	wrongCardNumber.style.display = "none";
 
 	startBtn.style.visibility = "visible";
 	endGameBtn.style.display = "none";
@@ -212,10 +209,12 @@ function displayFlashcards() {
 
 	let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
 	const wrongBtn = document.querySelectorAll(".wrong");
+
 	wrongBtn.forEach((elem, index) => {
 		elem.addEventListener("click", function () {
 			i++;
-			wrongCardNumber.innerHTML = `Answered wrong: ${i}`;
+			const outOfWrongCards = document.querySelector(".outOfWrongCards");
+			outOfWrongCards.textContent = `${i}`;
 
 			newFlashcard[index].style.backgroundColor = "rgb(240, 84, 84)";
 			rightWrongBtnDiv[index].style.display = "none";
@@ -228,7 +227,8 @@ function displayFlashcards() {
 	rightBtn.forEach((elem, index) => {
 		elem.addEventListener("click", function () {
 			m++;
-			answeredCardNumber.innerHTML = `Answered right: ${m}`;
+			const outOfRightsCards = document.querySelector(".outOfRightsCards");
+			outOfRightsCards.innerHTML = `${m}`;
 
 			newFlashcard[index].style.backgroundColor = "rgb(103, 198, 103)";
 			rightWrongBtnDiv[index].style.display = "none";
@@ -250,12 +250,15 @@ function generateObjectElement(selector, className, text) {
 }
 
 const rightWrongBtnDiv = document.getElementsByClassName("rightWrongBtnDiv");
+const guessedCards = document.querySelector(".guessed-cards");
+
 startBtn.addEventListener("click", function startGame() {
 	console.log("StartBtn working");
+	let i = 0;
+	let m = 0;
 
 	Array.from(rightWrongBtnDiv).forEach((el) => {
 		el.style.display = "block";
-		// console.log(el);
 	});
 
 	if (
@@ -272,13 +275,43 @@ startBtn.addEventListener("click", function startGame() {
 	const createdFlashcardsNumber =
 		flashcardHolder.getElementsByClassName("flashcardInfoDiv").length;
 
-	allCardsNumber.style.display = "block";
-	answeredCardNumber.style.display = "block";
-	wrongCardNumber.style.display = "block";
+	let guessedCardsNumberDiv = generateObjectElement(
+		"div",
+		"guessedCardsNumberDiv"
+	);
 
-	allCardsNumber.innerHTML = `Out of: ${createdFlashcardsNumber}`;
-	answeredCardNumber.innerHTML = `Answered right: 0`;
-	wrongCardNumber.innerHTML = `Answered wrong: 0`;
+	let outOfAllCards = generateObjectElement(
+		"p",
+		"outOfAllCards",
+		`${createdFlashcardsNumber}`
+	);
+
+	let outOfRightsCards = generateObjectElement("p", "outOfRightsCards", `${m}`);
+
+	let outOfWrongCards = generateObjectElement("p", "outOfWrongCards", `${i}`);
+
+	let allCardsNumber = generateObjectElement("p", "allCardsNumber", `Out of:`);
+	let answeredCardsNumber = generateObjectElement(
+		"p",
+		"answeredCardsNumber",
+		"Answered right:"
+	);
+	let wrongCardsNumber = generateObjectElement(
+		"p",
+		"wrongCardsNumber",
+		"Answered wrong:"
+	);
+
+	guessedCardsNumberDiv.append(
+		allCardsNumber,
+		outOfAllCards,
+		answeredCardsNumber,
+		outOfRightsCards,
+		wrongCardsNumber,
+		outOfWrongCards
+	);
+
+	guessedCards.append(guessedCardsNumberDiv);
 
 	startBtn.style.visibility = "hidden";
 });
@@ -286,6 +319,9 @@ startBtn.addEventListener("click", function startGame() {
 let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
 
 resetBtn.addEventListener("click", function resetGame() {
+	const outOfRightsCards = document.querySelector(".outOfRightsCards");
+	const outOfWrongCards = document.querySelector(".outOfWrongCards");
+
 	Array.from(newFlashcard).forEach((el, index) => {
 		el.style.backgroundColor = "transparent";
 		rightWrongBtnDiv[index].style.backgroundColor = "transparent";
@@ -293,20 +329,24 @@ resetBtn.addEventListener("click", function resetGame() {
 		rightWrongBtnDiv[index].style.display = "block";
 	});
 
-	i = 0;
-	m = 0;
-	answeredCardNumber.innerHTML = `Answered right: ${m}`;
-	wrongCardNumber.innerHTML = `Answered wrong: ${i}`;
+	let i = 0;
+	let m = 0;
+	outOfRightsCards.textContent = `${m}`;
+	outOfWrongCards.textContent = `${i}`;
 
 	const createdFlashcardsNumber =
 		flashcardHolder.getElementsByClassName("flashcardInfoDiv").length;
 
-	allCardsNumber.innerHTML = `Out of: ${createdFlashcardsNumber}`;
+	outOfAllCards.innerHTML = `${createdFlashcardsNumber}`;
 
 	console.log(`Pressed reset btn is clicked`);
 });
 
 endGameBtn.addEventListener("click", function endGame() {
+	document
+		.querySelectorAll(".guessedCardsNumberDiv")
+		.forEach((el) => el.remove());
+
 	console.log("End Game Btn working");
 
 	if (resetBtn.style.display === "none") {
@@ -318,10 +358,6 @@ endGameBtn.addEventListener("click", function endGame() {
 	Array.from(rightWrongBtnDiv).forEach((el) => {
 		el.style.display = "none";
 	});
-
-	allCardsNumber.style.display = "none";
-	answeredCardNumber.style.display = "none";
-	wrongCardNumber.style.display = "none";
 
 	startBtn.style.visibility = "visible";
 	endGameBtn.style.display = "none";

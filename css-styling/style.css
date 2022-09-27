@@ -1,11 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700;900&display=swap");
-* {
-	font-size: 25px;
-}
 
 body {
 	margin: 0 auto;
-	padding: 0;
 	font-family: "roboto";
 	background-color: #ffffff;
 
@@ -70,7 +66,7 @@ body {
 	display: none;
 }
 
-.guessed-cards-number-div {
+.guessed-cards {
 	display: flex;
 	flex-direction: row;
 	margin: 0 auto;
@@ -78,9 +74,15 @@ body {
 	min-width: 20vw;
 }
 
-.guessed-cards-number-div p {
+.guessedCardsNumberDiv {
+	display: flex;
+	flex-direction: row;
+	margin: 0 auto;
+}
+
+.guessedCardsNumberDiv p {
 	font-size: 28px;
-	padding: 20px 30px;
+	padding: 20px 20px;
 	margin-bottom: 30px;
 }
 
@@ -232,7 +234,6 @@ input {
 	margin: 0 auto;
 	margin: 30px 50px;
 	background-color: transparent;
-	/* padding: 60px 90px; */
 	border: 5px solid #dcd9e2;
 	border-radius: 20px;
 	min-width: 20vw;
@@ -258,12 +259,10 @@ input {
 	border: none;
 	border-radius: 20px;
 	margin: 0 auto;
-	/* margin-left: 100px;
-	margin-right: 100px; */
 	padding-top: 20px;
 	padding-bottom: 20px;
 	min-width: 15vw;
-	max-width: 20vw;
+	max-width: 16vw;
 	min-height: 5vh;
 	cursor: pointer;
 	outline: none;
@@ -306,7 +305,6 @@ input {
 	margin-left: 10px;
 	margin-right: 10px;
 	padding: 15px 35px;
-	/* margin-bottom: 30px; */
 	border: none;
 	border-radius: 10px;
 	font-size: 30px;
@@ -319,7 +317,6 @@ input {
 	margin-left: 10px;
 	margin-right: 10px;
 	padding: 15px 35px;
-	/* margin-bottom: 30px; */
 	border: 5px solid #797575;
 	border-radius: 10px;
 	font-size: 30px;
@@ -332,17 +329,13 @@ input {
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	/* min-width: 20vw; */
 	margin-bottom: 20px;
 	display: none;
 	background-color: rgba(255, 255, 255, 0.5);
 }
 
 .rightAnswerButton {
-	/* margin-top: 20px; */
 	margin: 0 auto;
-	/* margin-left: 10px; */
-	/* margin-right: 10px; */
 	background-color: transparent;
 	background-repeat: no-repeat;
 	border: none;
@@ -353,16 +346,11 @@ input {
 }
 
 .wrongAnswerButton {
-	/* margin-top: 20px; */
 	margin: 0 auto;
-	/* margin-left: 10px; */
-	/* margin-right: 10px; */
 	padding: 15px 35px;
 	background-color: transparent;
-	/* background-repeat: no-repeat; */
 	border: none;
 	cursor: pointer;
-	/* overflow: hidden; */
 	outline: none;
 }
 
@@ -374,46 +362,9 @@ input {
 .fa-circle-xmark {
 	color: #f6b11c;
 	margin: 0 auto;
-	/* margin-right: 230px; */
 }
 
 .fa-circle-check {
 	color: #1b9329;
 	margin: 0 auto;
-	/* margin-left: 230px; */
-}
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-	/* #app {
-		max-width: 100vw;
-	}
-
-	.page-header {
-		max-width: 100vw;
-	}
-
-	.start-game-div,
-	.reset-btn-div {
-		margin-left: 50px;
-		min-width: 10vw;
-	}
-
-	.start-game-div button,
-	.reset-btn-div button {
-		padding: 25px 20px;
-		font-size: 30px;
-	} */
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
 }
