@@ -254,8 +254,8 @@ const guessedCards = document.querySelector(".guessed-cards");
 
 startBtn.addEventListener("click", function startGame() {
 	console.log("StartBtn working");
-	let i = 0;
-	let m = 0;
+	i = 0;
+	m = 0;
 
 	Array.from(rightWrongBtnDiv).forEach((el) => {
 		el.style.display = "block";
@@ -321,6 +321,7 @@ let newFlashcard = document.getElementsByClassName("flashcardInfoDiv");
 resetBtn.addEventListener("click", function resetGame() {
 	const outOfRightsCards = document.querySelector(".outOfRightsCards");
 	const outOfWrongCards = document.querySelector(".outOfWrongCards");
+	const outOfAllCards = document.querySelector(".outOfAllCards");
 
 	Array.from(newFlashcard).forEach((el, index) => {
 		el.style.backgroundColor = "transparent";
@@ -329,8 +330,8 @@ resetBtn.addEventListener("click", function resetGame() {
 		rightWrongBtnDiv[index].style.display = "block";
 	});
 
-	let i = 0;
-	let m = 0;
+	i = 0;
+	m = 0;
 	outOfRightsCards.textContent = `${m}`;
 	outOfWrongCards.textContent = `${i}`;
 
