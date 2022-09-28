@@ -58,7 +58,6 @@ cancelCreateNewCardIcon.addEventListener("click", function cancelCard() {
 });
 
 createNewCardDiv.addEventListener("submit", (e) => {
-	console.log("Submit BTN is  working!");
 	e.preventDefault();
 
 	const formData = new FormData(e.target);
@@ -129,13 +128,10 @@ function displayFlashcards() {
 				flashcardsInfo.splice(index, 1);
 				flashcardInfoDiv.remove();
 
-				console.log("DeleteBtn is working!");
-
 				localStorage.setItem("newFlashcards", JSON.stringify(flashcardsInfo));
 				displayFlashcards();
 			});
 
-			console.log(flashcard.editingText);
 			if (flashcard.editingText) {
 				questionHolder.value = flashcard.question;
 				answerHolder.value = flashcard.answer;
@@ -160,7 +156,6 @@ function displayFlashcards() {
 
 				flashcardsInfo[index].editingText = !flashcardsInfo[index].editingText;
 
-				console.log("EditBtn is working!");
 				localStorage.setItem("newFlashcards", JSON.stringify(flashcardsInfo));
 
 				displayFlashcards();
@@ -184,13 +179,13 @@ function displayFlashcards() {
 				"button",
 				"rightAnswerButton"
 			);
-			rightAnswerButton.innerHTML = `<i class="fa-regular fa-circle-xmark wrong"></i>`;
+			rightAnswerButton.innerHTML = `<i class="fa-regular fa-circle-check right"></i>`;
 
 			const wrongAnswerButton = generateObjectElement(
 				"button",
 				"wrongAnswerButton"
 			);
-			wrongAnswerButton.innerHTML = `<i class="fa-regular fa-circle-check right"></i>`;
+			wrongAnswerButton.innerHTML = `<i class="fa-regular fa-circle-xmark wrong"></i>`;
 
 			flashcardButtonHolder.append(cardDeleteBtn, cardEditBtn);
 			rightWrongBtnDiv.append(rightAnswerButton, wrongAnswerButton);
@@ -222,8 +217,6 @@ function displayFlashcards() {
 
 			newFlashcard[index].style.backgroundColor = "rgb(240, 84, 84)";
 			rightWrongBtnDiv[index].style.display = "none";
-
-			console.log(`Button WRONG is clicked ${index}`);
 		});
 	});
 
@@ -236,8 +229,6 @@ function displayFlashcards() {
 
 			newFlashcard[index].style.backgroundColor = "rgb(103, 198, 103)";
 			rightWrongBtnDiv[index].style.display = "none";
-
-			console.log(`Button RIGHT is clicked ${index}`);
 		});
 	});
 }
@@ -257,7 +248,6 @@ const rightWrongBtnDiv = document.getElementsByClassName("rightWrongBtnDiv");
 const guessedCards = document.querySelector(".guessed-cards");
 
 startBtn.addEventListener("click", function startGame() {
-	console.log("StartBtn working");
 	i = 0;
 	m = 0;
 
@@ -343,16 +333,12 @@ resetBtn.addEventListener("click", function resetGame() {
 		flashcardHolder.getElementsByClassName("flashcardInfoDiv").length;
 
 	outOfAllCards.innerHTML = `${createdFlashcardsNumber}`;
-
-	console.log(`Pressed reset btn is clicked`);
 });
 
 endGameBtn.addEventListener("click", function endGame() {
 	document
 		.querySelectorAll(".guessedCardsNumberDiv")
 		.forEach((el) => el.remove());
-
-	console.log("End Game Btn working");
 
 	if (resetBtn.style.display === "none") {
 		resetBtn.style.display = "block";

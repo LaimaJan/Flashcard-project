@@ -368,3 +368,11 @@ input {
 	color: #1b9329;
 	margin: 0 auto;
 }
+
+.elementsDisplayNone {
+	display: none;
+}
+
+.elementsDisplayBlock {
+	display: block;
+}
